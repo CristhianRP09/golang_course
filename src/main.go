@@ -1,55 +1,52 @@
 package main
 
-import (
-	"fmt"
-	"log"
-	"strconv"
-)
+import "fmt"
 
 func main() {
-	// Conditional statements
-	value1 := 1
-	value2 := 3
+	module := 4 % 2
 
-	if value1 == 1 {
-		fmt.Println("Equals to 1")
-	} else {
-		fmt.Println("Not equal to 1")
+	switch module {
+	case 0:
+		fmt.Println("Is even!")
+	default:
+		fmt.Println("Is odd!")
 	}
 
-	// AND operator
-	if value1 == 1 && value2 == 2 {
-		fmt.Println("TRUE")
+	// In a short way
+	switch module := 4 % 2; module {
+	case 0:
+		fmt.Println("Is even!")
+	default:
+		fmt.Println("Is odd!")
 	}
 
-	// OR operator
-	if value1 == 0 || value2 == 3 {
-		fmt.Println("TRUE")
+	// Switch sentence without condition
+	value := 120
+	switch {
+	case value > 100:
+		fmt.Println("Greater than 100")
+	case value < 0:
+		fmt.Println("Less than 0")
+	default:
+		fmt.Println("Within range from 0 to 100")
 	}
 
-	//  Parsing text into numbers
-	value, error := strconv.Atoi("53")
-	if error != nil {
-		log.Fatal(error)
-	}
-	fmt.Println("Value:", value)
+	// defer keyword
+	fmt.Println("Hello ... {")
+	defer fmt.Println("... World }")
 
-	// Conditional for loop
-	for i := 0; i <= 10; i++ {
-		fmt.Println(i)
-	}
+	// continue and break keywords
+	for i := 0; i < 10; i++ {
+		if i != 2 {
+			fmt.Println(i)
+		} else {
+			fmt.Println("It's 2")
+			continue
+		}
 
-	// For while loop
-	counter := 0
-	for counter < 10 {
-		fmt.Println(counter)
-		counter++
-	}
-
-	// For forever loop
-	counterForever := 0
-	for {
-		fmt.Println(counterForever)
-		counterForever++
+		if i == 8 {
+			fmt.Println("It's 8... END")
+			break
+		}
 	}
 }
