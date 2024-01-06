@@ -2,63 +2,57 @@ package main
 
 import "fmt"
 
+func normalFunction(msg string) {
+	fmt.Printf(">>>>>>>>>>> Hello world %s\n", msg)
+}
+
+func tripleArgument(a, b int, c string) {
+	fmt.Println(a, b, c)
+}
+
+func duplicate(a int) int {
+	return a * 2
+}
+
+func doubleReturn(a int) (c, d int) {
+	return a, 2 * a
+}
+
 func main() {
-	// Declaring constants
-	const pi float64 = 3.141592
-	const pi2 = 3.1416
+	helloMessage := "Hello"
+	worldMessage := "World"
 
-	fmt.Println("pi", pi)
-	fmt.Println("pi2", pi2)
+	// Println
+	fmt.Println(helloMessage, worldMessage)
+	fmt.Println(helloMessage, worldMessage)
 
-	// Declaring integer variables
-	base := 12          // := declares and initializes a variable
-	var height int = 14 // declare its type and assing a value
-	var area int        // declares its type
+	// Printf
+	name := "Cristhian"
+	age := 27
+	fmt.Printf("My name is %s and I am %d years old\n", name, age)
+	fmt.Printf("My name is %v and I am %v years old\n", name, age)
 
-	fmt.Println(base, height, area)
+	// Sprintf
+	message := fmt.Sprintf("My name is %s and I am %d years old", name, age)
+	fmt.Println(message)
 
-	// Zero values
-	var a int     // 0
-	var b float64 // 0
-	var c string  // ""
-	var d bool    // false
+	// Data type
+	fmt.Printf("helloMessage: %T\n", helloMessage)
+	fmt.Printf("name: %T\n", name)
 
-	fmt.Println(a, b, c, d)
+	// Functions
+	normalFunction("1")
+	normalFunction("2")
+	tripleArgument(1, 2, "Hello!")
 
-	// Square area
-	const squareBase = 10
-	squareArea := squareBase * squareBase
-	fmt.Println("Square area", squareArea)
+	value := duplicate(3)
+	fmt.Println("Value:", value)
 
-	// Aritmetic operations
-	x := 10
-	y := 50
+	value1, value2 := doubleReturn(2)
+	fmt.Println("Value1:", value1)
+	fmt.Println("Value2:", value2)
 
-	// Sum
-	result := x + y
-	fmt.Println("Sum: ", result)
-
-	// Diff
-	result = y - x
-	fmt.Println("Difference: ", result)
-
-	// Product
-	result = x * y
-	fmt.Println("Product: ", result)
-
-	// Division
-	result = y / x
-	fmt.Println("Division: ", result)
-
-	// Module
-	result = y % x
-	fmt.Println("Module: ", result)
-
-	// Increment
-	x++
-	fmt.Println("Increment: ", x)
-
-	// Decrement
-	x--
-	fmt.Println("Decrement: ", x)
+	// Just using the first returned value
+	v1, _ := doubleReturn(5) // _ means ignoring the 2nd value in this case
+	fmt.Println("v1:", v1)
 }
