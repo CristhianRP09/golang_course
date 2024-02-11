@@ -1,23 +1,24 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	mypkg "golang_course/src/mypackage"
+)
 
-// Stringers - customizing structs output in console!
 func main() {
-	myPC := pc{ram: 32, disk: 1024, brand: "Lenovo"}
+	// Interfaces
+	mySquare := mypkg.Square{Base: 10}
+	myRectangle := mypkg.Rectangle{Base: 5, Height: 8}
 
-	// Before defining the stringer, the output in console is {32 1024 Lenovo}
-	// After defining the stringer, the output in console is { RAM: 32 GB, DISK: 1024 GB, BRAND: Lenovo }
-	fmt.Println(myPC)
-}
+	// Without interfaces, we need to run the area methods for each instance:
+	fmt.Println("Square area:", mySquare.Area())
+	fmt.Println("Rectangle area:", myRectangle.Area())
 
-type pc struct {
-	ram   int
-	disk  int
-	brand string
-}
+	// With interfaces:
+	mypkg.ComputeArea(mySquare)
+	mypkg.ComputeArea(myRectangle)
 
-// The name String is neccesary to define a stringer!
-func (myPC pc) String() string {
-	return fmt.Sprintf("{ RAM: %d GB, DISK: %d GB, BRAND: %s }", myPC.ram, myPC.disk, myPC.brand)
+	// List of Interfaces
+	mixedList := []interface{}{"Hey!", true, 123, -3.1324}
+	fmt.Println(mixedList)
 }
