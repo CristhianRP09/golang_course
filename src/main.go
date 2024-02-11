@@ -1,25 +1,32 @@
 package main
 
-import "fmt"
+import (
+	"fmt"
+	mypkg "golang_course/src/mypackage" // mypkg is an alias for this package
+)
+
+// Defining a struct
+type car struct {
+	brand string
+	year  int
+}
 
 func main() {
-	// Maps
-	m := make(map[string]int)
-	m["X"] = 14
-	m["Y"] = 20
+	// Classes in Golang: Structs
 
-	fmt.Println(m)
+	myCar := car{brand: "Ford", year: 2020}
+	fmt.Println(myCar)
 
-	// Iterating maps
-	for i, value := range m {
-		fmt.Println(i, value)
-	}
+	// Another way to instantiate an struct
+	var anotherCar car
+	anotherCar.brand = "Ferrari"
+	fmt.Println(anotherCar) // non-specified attributes (year) are set up to zero-value!
 
-	// Finding a value
-	value := m["X"]
-	fmt.Println(value)
-	value2 := m["Z"] // Prints zero value (0 in this case) for non-existing keys
-	fmt.Println(value2)
-	nonExisting, ok := m["Z"] // ok says if exists or not this key (bool)
-	fmt.Println(nonExisting, ok)
+	// Importing from other packages
+	var vehicle mypkg.CarPublic // Instantiates a CarPublic struct
+	vehicle.Brand = "Ferrari"
+	vehicle.Year = 2020
+	fmt.Println(vehicle)
+
+	mypkg.PrintMessage("Hey you!") // Executes the function defined in mypkg package!
 }
