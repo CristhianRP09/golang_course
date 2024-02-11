@@ -2,31 +2,26 @@ package main
 
 import (
 	"fmt"
-	mypkg "golang_course/src/mypackage" // mypkg is an alias for this package
+	"golang_course/src/mypackage"
 )
 
-// Defining a struct
-type car struct {
-	brand string
-	year  int
-}
-
+// Structs and Pointers
 func main() {
-	// Classes in Golang: Structs
+	a := 50
+	b := &a // & stands for pointing to memory ref of variable a
 
-	myCar := car{brand: "Ford", year: 2020}
-	fmt.Println(myCar)
+	fmt.Println("a -->", a)
+	fmt.Println("b's memory ref -->", b)     // Here b shows the memory ref value (0x...)
+	fmt.Println("Actual value of b -->", *b) // Asterisk (*) stands for showing the actual value of b (50)
 
-	// Another way to instantiate an struct
-	var anotherCar car
-	anotherCar.brand = "Ferrari"
-	fmt.Println(anotherCar) // non-specified attributes (year) are set up to zero-value!
+	*b = 100 // If the value which is pointing to a memory ref is modified, the other variables pointing to that memory ref will change as well.
+	fmt.Println("New value of a -->", a)
 
-	// Importing from other packages
-	var vehicle mypkg.CarPublic // Instantiates a CarPublic struct
-	vehicle.Brand = "Ferrari"
-	vehicle.Year = 2020
-	fmt.Println(vehicle)
+	myPC := mypackage.Pc{Ram: 16, Disk: 256, Brand: "MSI"}
+	fmt.Println(myPC)
+	myPC.Ping() // It calls the Ping() method in pc struct
 
-	mypkg.PrintMessage("Hey you!") // Executes the function defined in mypkg package!
+	fmt.Println("myPC's RAM before duplication -->", myPC.Ram)
+	myPC.DuplicateRAM()
+	fmt.Println("myPC's RAM after duplication -->", myPC.Ram) // myPC instance has a duplicated Ram attribute!
 }
