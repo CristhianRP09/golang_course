@@ -1,27 +1,23 @@
 package main
 
-import (
-	"fmt"
-	"golang_course/src/mypackage"
-)
+import "fmt"
 
-// Structs and Pointers
+// Stringers - customizing structs output in console!
 func main() {
-	a := 50
-	b := &a // & stands for pointing to memory ref of variable a
+	myPC := pc{ram: 32, disk: 1024, brand: "Lenovo"}
 
-	fmt.Println("a -->", a)
-	fmt.Println("b's memory ref -->", b)     // Here b shows the memory ref value (0x...)
-	fmt.Println("Actual value of b -->", *b) // Asterisk (*) stands for showing the actual value of b (50)
-
-	*b = 100 // If the value which is pointing to a memory ref is modified, the other variables pointing to that memory ref will change as well.
-	fmt.Println("New value of a -->", a)
-
-	myPC := mypackage.Pc{Ram: 16, Disk: 256, Brand: "MSI"}
+	// Before defining the stringer, the output in console is {32 1024 Lenovo}
+	// After defining the stringer, the output in console is { RAM: 32 GB, DISK: 1024 GB, BRAND: Lenovo }
 	fmt.Println(myPC)
-	myPC.Ping() // It calls the Ping() method in pc struct
+}
 
-	fmt.Println("myPC's RAM before duplication -->", myPC.Ram)
-	myPC.DuplicateRAM()
-	fmt.Println("myPC's RAM after duplication -->", myPC.Ram) // myPC instance has a duplicated Ram attribute!
+type pc struct {
+	ram   int
+	disk  int
+	brand string
+}
+
+// The name String is neccesary to define a stringer!
+func (myPC pc) String() string {
+	return fmt.Sprintf("{ RAM: %d GB, DISK: %d GB, BRAND: %s }", myPC.ram, myPC.disk, myPC.brand)
 }
